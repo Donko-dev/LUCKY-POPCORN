@@ -10,7 +10,9 @@ let state = {
   query: ""
 };
 
-const catalog = loadCatalog();
+let catalog = null;
+let siteTextOverrides = {};
+let securitySettings = { copyProtection: false };
 let modalGalleryIndex = 0;
 let modalGalleryImages = [];
 
@@ -29,7 +31,7 @@ function applyTheme() {
 
 function applyLang() {
   document.documentElement.setAttribute("lang", state.lang);
-  const overrides = loadSiteTexts();
+  const overrides = siteTextOverrides;
   document.querySelectorAll("[data-i18n]").forEach(el => {
     const key = el.getAttribute("data-i18n");
     const ov = overrides[state.lang] && overrides[state.lang][key];
@@ -393,8 +395,7 @@ window.addEventListener("appinstalled", () => {
 /* ---------------- Protection anti-copie (dissuasive, pas infaillible) ---------------- */
 
 function applyCopyProtection() {
-  const settings = loadSecuritySettings();
-  if (settings.copyProtection) {
+  if (securitySettings.copyProtection) {
     document.body.classList.add("no-select");
     document.addEventListener("contextmenu", preventDefaultHandler);
     document.addEventListener("copy", preventDefaultHandler);
@@ -410,7 +411,12 @@ function preventDefaultHandler(e) { e.preventDefault(); }
 
 /* ---------------- Init ---------------- */
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
+  catalog = await resolveCatalog();
+  const settings = await resolveSiteSettings();
+  siteTextOverrides = settings.texts || {};
+  securitySettings = settings.security || { copyProtection: false };
+
   applyTheme();
   applyLang();
   renderAll();

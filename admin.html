@@ -4,15 +4,15 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Espace producteur — Lucky Popcorn</title>
-<link rel="icon" href="./assets/icons/icon-32.png">
-<link rel="stylesheet" href="./css/style.css">
+<link rel="icon" href="./icon-32.png">
+<link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
 <header class="site-header">
   <div class="container header-row">
     <a class="brand" href="./index.html">
-      <img src="./assets/logo-master.png" alt="Lucky Popcorn logo">
+      <img src="./logo-master.png" alt="Lucky Popcorn logo">
       <div class="brand-text">
         <div class="name">Lucky Popcorn</div>
         <div class="tag">Espace producteur — Centre de contrôle</div>
@@ -38,6 +38,26 @@
   </div>
 
   <div id="adminContent" style="display:none;">
+
+    <!-- ================= PUBLICATION ================= -->
+    <div class="admin-card" style="border: 2px solid var(--gold);">
+      <h2>🚀 Publier vos changements pour TOUS vos clients</h2>
+      <p style="color:var(--text-soft); font-size:0.9rem;">
+        Ce que vous modifiez ici n'est visible que sur <b>cet appareil</b>, tant que vous ne l'avez pas publié.
+        Pour que vos clients voient automatiquement vos changements sur leur téléphone :
+      </p>
+      <ol style="color:var(--text-soft); font-size:0.9rem; padding-left:20px;">
+        <li>Faites vos modifications ci-dessous (produits, prix, textes...).</li>
+        <li>Cliquez sur <b>"⬇️ Télécharger catalog-data.json"</b> et/ou <b>"⬇️ Télécharger site-settings.json"</b>.</li>
+        <li>Allez sur votre dépôt GitHub → glissez ce(s) fichier(s) à la racine (même nom, ça remplace l'ancien) → Commit changes.</li>
+        <li>C'est tout : tous vos clients verront la mise à jour dès leur prochaine ouverture de l'app.</li>
+      </ol>
+      <div style="display:flex; gap:10px; flex-wrap:wrap;">
+        <button class="btn btn-primary btn-sm" id="exportBtn">⬇️ Télécharger catalog-data.json</button>
+        <button class="btn btn-primary btn-sm" id="exportSettingsBtn">⬇️ Télécharger site-settings.json</button>
+        <button class="btn btn-outline btn-sm" id="loadPublishedBtn">🔄 Charger la version déjà publiée</button>
+      </div>
+    </div>
 
     <!-- ================= AJOUT / MODIFICATION ================= -->
     <div class="admin-card">
@@ -191,7 +211,6 @@
       <h2>📋 Catalogue actuel</h2>
       <div id="itemsList"></div>
       <div style="display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;">
-        <button class="btn btn-outline btn-sm" id="exportBtn">⬇️ Exporter (JSON)</button>
         <button class="btn btn-outline btn-sm" id="importBtn">⬆️ Importer (JSON)</button>
         <input type="file" id="importFile" accept="application/json" style="display:none;">
         <button class="btn btn-outline btn-sm danger" id="resetBtn">♻️ Réinitialiser au catalogue par défaut</button>
@@ -233,8 +252,8 @@
   </div>
 </div>
 
-<script src="./js/data.js"></script>
-<script src="./js/icons.js"></script>
-<script src="./js/admin.js"></script>
+<script src="./data.js"></script>
+<script src="./icons.js"></script>
+<script src="./admin.js"></script>
 </body>
 </html>

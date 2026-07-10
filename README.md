@@ -50,6 +50,19 @@ lucky-popcorn/
 - **Protection anti-copie** : c'est un frein simple (blocage clic-droit / sélection / copier-coller), pas une sécurité réelle. Un site 100% autonome (sans serveur) ne peut techniquement pas empêcher un visiteur déterminé de consulter le code source via son navigateur. Aucun site web statique ne peut garantir une protection absolue contre le piratage — soyez prudent avec toute promesse en ce sens.
 - **Mot de passe producteur** : stocké lui aussi uniquement sur l'appareil utilisé pour l'admin — si vous le changez sur un appareil, il ne changera pas sur un autre appareil ouvrant `admin.html`.
 
+## 🚀 Comment publier vos changements pour TOUS vos clients (sans jamais toucher au code)
+
+**À bien comprendre :** ce que vous modifiez dans l'espace producteur n'est visible que sur **l'appareil que vous utilisez**, tant que vous ne l'avez pas *publié*. Sans serveur ni base de données, il n'existe pas d'autre moyen technique pour qu'un changement atteigne automatiquement le téléphone de vos clients — il faut cette étape de publication (mais aucune ligne de code à écrire, juste un fichier à remplacer).
+
+1. Faites vos modifications dans l'admin (produits, prix, textes, etc.) — un bandeau doré tout en haut de la page s'appelle **"🚀 Publier vos changements"**.
+2. Cliquez sur **"⬇️ Télécharger catalog-data.json"** (et **"⬇️ Télécharger site-settings.json"** si vous avez modifié des textes ou la protection anti-copie).
+3. Sur GitHub, allez à la racine de votre dépôt → **"Add file" → "Upload files"** → glissez le(s) fichier(s) téléchargé(s) (même nom, ça remplace l'ancien automatiquement) → **Commit changes**.
+4. C'est terminé : **tous les téléphones de vos clients** récupèrent automatiquement ces fichiers à la prochaine ouverture de l'application (en ligne), grâce à la vérification réseau intégrée — sans rien installer ni aucune manipulation de leur côté.
+
+**Bouton "🔄 Charger la version déjà publiée"** dans l'admin : utile si vous changez d'appareil — il récupère ce qui est actuellement en ligne pour repartir d'une base à jour avant de continuer vos modifications.
+
+*Remarque : cette synchronisation nécessite une connexion internet (comme GitHub Pages lui-même). Testée en local via double-clic sur `index.html` (`file://`), la récupération de `catalog-data.json` ne fonctionnera pas à cause des restrictions du navigateur — c'est normal, ça fonctionnera dès la mise en ligne réelle.*
+
 ## 🎨 À propos des images
 
 Comme il n'existe pas d'outil de génération de photos réalistes dans cet environnement, chaque produit/service/activité utilise une **illustration vectorielle (SVG) originale, générée sur mesure** (forme + palette de couleurs uniques) plutôt qu'une photo. Elles s'affichent instantanément, ne pèsent presque rien, et fonctionnent hors-ligne — mais si vous préférez de vraies photos, vous pouvez les glisser dans `/assets` et les référencer à la place des SVG dans `js/data.js` (propriété `icon`), ou me transmettre des photos à intégrer.

@@ -284,9 +284,42 @@ function exportCatalog() {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = "lucky-popcorn-catalogue.json";
+  a.download = "catalog-data.json";
   a.click();
   URL.revokeObjectURL(url);
+}
+
+function exportSiteSettings() {
+  const payload = {
+    texts: loadSiteTexts(),
+    security: loadSecuritySettings()
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = "site-settings.json";
+  a.click();
+  URL.revokeObjectURL(url);
+}
+
+async function loadPublishedIntoDraft() {
+  if (!confirm("Charger la version actuellement publiée en ligne dans votre brouillon local ? Vos modifications locales non publiées seront remplacées.")) return;
+  const publishedCatalog = await fetchPublishedJSON("./catalog-data.json");
+  if (publishedCatalog && publishedCatalog.products) {
+    if (!publishedCatalog.custom) publishedCatalog.custom = [];
+    catalog = publishedCatalog;
+    saveCatalog(catalog);
+    renderItemsList();
+  }
+  const publishedSettings = await fetchPublishedJSON("./site-settings.json");
+  if (publishedSettings) {
+    if (publishedSettings.texts) saveSiteTexts(publishedSettings.texts);
+    if (publishedSettings.security) saveSecuritySettings(publishedSettings.security);
+    renderSiteTextEditor();
+    loadSecurityUI();
+  }
+  alert("Version publiée chargée dans votre brouillon local.");
 }
 
 function importCatalog(file) {
@@ -429,6 +462,8 @@ document.addEventListener("DOMContentLoaded", () => {
   document.getElementById("f_images").addEventListener("change", (e) => handleImageUpload(e.target.files));
 
   document.getElementById("exportBtn").addEventListener("click", exportCatalog);
+  document.getElementById("exportSettingsBtn").addEventListener("click", exportSiteSettings);
+  document.getElementById("loadPublishedBtn").addEventListener("click", loadPublishedIntoDraft);
   document.getElementById("importBtn").addEventListener("click", () => document.getElementById("importFile").click());
   document.getElementById("importFile").addEventListener("change", (e) => { if (e.target.files[0]) importCatalog(e.target.files[0]); });
   document.getElementById("resetBtn").addEventListener("click", resetCatalog);

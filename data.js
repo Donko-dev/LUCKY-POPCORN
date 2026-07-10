@@ -388,6 +388,42 @@ function saveSecuritySettings(settings) {
   localStorage.setItem("luckySecurity", JSON.stringify(settings));
 }
 
+/* ---------------- Données publiées (partagées par tous les visiteurs, sans serveur) ----------------
+   Le producteur exporte ces fichiers depuis l'admin et les dépose sur GitHub :
+   - catalog-data.json   → produits / services / activités / autres
+   - site-settings.json  → textes du site + réglage de protection anti-copie
+   Le site public les récupère automatiquement à chaque visite (si en ligne). */
+
+async function fetchPublishedJSON(path) {
+  try {
+    const res = await fetch(`${path}?v=${Date.now()}`, { cache: "no-store" });
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (e) {
+    return null; // hors-ligne, fichier absent, ou ouverture en file:// (normal, pas d'erreur bloquante)
+  }
+}
+
+async function resolveCatalog() {
+  const published = await fetchPublishedJSON("./catalog-data.json");
+  if (published && published.products && published.services && published.activities) {
+    if (!published.custom) published.custom = [];
+    return published;
+  }
+  return loadCatalog(); // secours : brouillon local (ou catalogue par défaut)
+}
+
+async function resolveSiteSettings() {
+  const published = await fetchPublishedJSON("./site-settings.json");
+  if (published && (published.texts || published.security)) {
+    return {
+      texts: published.texts || {},
+      security: published.security || { copyProtection: false }
+    };
+  }
+  return { texts: loadSiteTexts(), security: loadSecuritySettings() }; // secours local
+}
+
 /* ---------------- Code d'accès producteur ---------------- */
 
 const ADMIN_PIN_KEY = "luckyAdminPin";
