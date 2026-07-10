@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espace producteur — Lucky Popcorn</title>
+<link rel="icon" href="./icon-32.png">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="./index.html">
+      <img src="./logo-master.png" alt="Lucky Popcorn logo">
+      <div class="brand-text">
+        <div class="name">Lucky Popcorn</div>
+        <div class="tag">Espace producteur — Centre de contrôle</div>
+      </div>
+    </a>
+    <div class="header-actions">
+      <button class="icon-btn" id="themeToggle" title="Thème">🌙</button>
+      <a class="btn btn-outline btn-sm" href="./index.html">← Retour au site</a>
+    </div>
+  </div>
+</header>
+
+<div class="admin-wrap">
+
+  <div class="admin-card" id="lockCard">
+    <h2>🔒 Accès producteur</h2>
+    <p style="color:var(--text-soft); font-size:0.9rem;">Entrez le code producteur pour gérer vos produits, services, activités, textes et réglages. Ce code est stocké uniquement sur cet appareil (aucun serveur, aucune base de données).</p>
+    <div class="field">
+      <label>Code producteur</label>
+      <input type="password" id="pinInput" placeholder="Code producteur">
+    </div>
+    <button class="btn btn-primary" id="unlockBtn">Déverrouiller</button>
+  </div>
+
+  <div id="adminContent" style="display:none;">
+
+    <!-- ================= AJOUT / MODIFICATION ================= -->
+    <div class="admin-card">
+      <h2>➕ Ajouter / modifier un produit, service ou activité</h2>
+      <p style="color:var(--text-soft); font-size:0.85rem; margin-top:-8px;">Choisissez "Autre activité / secteur" pour ajouter n'importe quoi qui ne rentre pas dans popcorn ou gaz bio-combustible (avec son propre secteur libre).</p>
+      <form id="itemForm">
+        <div class="two-col">
+          <div class="field">
+            <label>Type</label>
+            <select id="f_kind">
+              <option value="product">Produit (popcorn)</option>
+              <option value="service">Service (gaz bio-combustible)</option>
+              <option value="activity">Activité</option>
+              <option value="custom">Autre activité / secteur</option>
+            </select>
+          </div>
+          <div class="field" id="groupFieldWrap">
+            <label>Groupe / catégorie</label>
+            <select id="f_group">
+              <option value="socle">Socle commun (nature/salé)</option>
+              <option value="sucre">Variantes sucrées</option>
+              <option value="caramel">Qualités de caramel</option>
+              <option value="gaz">Distribution de gaz bio-combustible</option>
+              <option value="activite">Activité</option>
+            </select>
+          </div>
+          <div class="field" id="sectorFieldWrap" style="display:none;">
+            <label>Nom du secteur / de l'activité (libre)</label>
+            <input type="text" id="f_sector" placeholder="Ex : Vente de charbon, Location de matériel...">
+          </div>
+        </div>
+
+        <div class="field" id="placementFieldWrap">
+          <label>Où ce produit doit-il apparaître ?</label>
+          <select id="f_placement">
+            <option value="catalogue">Catalogue principal (section normale)</option>
+            <option value="autres">Autres activités & secteurs</option>
+          </select>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label>Nom (Français)</label>
+            <input type="text" id="f_name_fr" placeholder="Ex : Popcorn Caramel Passion">
+          </div>
+          <div class="field">
+            <label>Nom (English)</label>
+            <input type="text" id="f_name_en" placeholder="Ex : Passion Caramel Popcorn">
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label>Description courte (FR)</label>
+            <textarea id="f_short_fr" placeholder="Une phrase accrocheuse"></textarea>
+          </div>
+          <div class="field">
+            <label>Description courte (EN)</label>
+            <textarea id="f_short_en"></textarea>
+          </div>
+        </div>
+        <div class="two-col">
+          <div class="field">
+            <label>Détails / recette (FR)</label>
+            <textarea id="f_details_fr" placeholder="Ingrédients, procédé de fabrication..."></textarea>
+          </div>
+          <div class="field">
+            <label>Détails / recette (EN)</label>
+            <textarea id="f_details_en"></textarea>
+          </div>
+        </div>
+
+        <div class="field">
+          <label>📷 Photos du produit (maximum 4 — remplace l'illustration si ajoutées)</label>
+          <input type="file" id="f_images" accept="image/*" multiple>
+          <div id="imagePreviews" style="display:flex; gap:10px; flex-wrap:wrap; margin-top:10px;"></div>
+          <div id="imageCountLabel" style="font-size:0.78rem; color:var(--text-soft); margin-top:6px;">0/4 image(s)</div>
+        </div>
+
+        <div class="field">
+          <label>Illustration par défaut (forme + couleur — utilisée si aucune photo n'est ajoutée)</label>
+          <div class="two-col">
+            <select id="f_icon_shape">
+              <option value="kernel">Grain de maïs</option>
+              <option value="cluster">Amas caramélisé</option>
+              <option value="bottle">Bouteille de gaz bio-combustible</option>
+              <option value="regulator">Détendeur</option>
+              <option value="truck">Camion de livraison</option>
+              <option value="kettle">Marmite</option>
+              <option value="crate">Caisse (gros)</option>
+              <option value="handshake">Partenariat</option>
+            </select>
+            <select id="f_icon_palette">
+              <option value="cream">Crème</option>
+              <option value="gold">Or</option>
+              <option value="pink">Rose</option>
+              <option value="butter">Beurre</option>
+              <option value="amber">Ambre</option>
+              <option value="honey">Miel</option>
+              <option value="cocoa">Cacao</option>
+              <option value="milk">Lait</option>
+              <option value="blue">Bleu</option>
+              <option value="orange">Orange</option>
+              <option value="red">Rouge</option>
+              <option value="green">Vert</option>
+              <option value="steel">Acier</option>
+              <option value="burgundy">Bordeaux</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="two-col">
+          <div class="field">
+            <label>🔗 Lien externe (optionnel)</label>
+            <input type="url" id="f_link" placeholder="https://...">
+          </div>
+          <div class="field">
+            <label>🎬 Lien vidéo (optionnel)</label>
+            <input type="url" id="f_video" placeholder="https://... (YouTube, TikTok, etc.)">
+          </div>
+        </div>
+
+        <div id="priceFieldsProduct">
+          <p style="font-size:0.8rem; color:var(--text-soft); margin:0 0 6px;">Prix normal, puis prix promo optionnel (laisser vide si pas de promotion — le prix normal sera alors affiché barré si une promo existe).</p>
+          <div class="two-col">
+            <div class="field"><label>Prix petit (FCFA)</label><input type="number" id="f_price_small" value="500"></div>
+            <div class="field"><label>Promo petit (FCFA, optionnel)</label><input type="number" id="f_promo_small" placeholder="ex: 400"></div>
+          </div>
+          <div class="two-col">
+            <div class="field"><label>Prix moyen (FCFA)</label><input type="number" id="f_price_medium" value="900"></div>
+            <div class="field"><label>Promo moyen (FCFA, optionnel)</label><input type="number" id="f_promo_medium" placeholder="ex: 700"></div>
+          </div>
+          <div class="two-col">
+            <div class="field"><label>Prix grand (FCFA)</label><input type="number" id="f_price_large" value="1500"></div>
+            <div class="field"><label>Promo grand (FCFA, optionnel)</label><input type="number" id="f_promo_large" placeholder="ex: 1200"></div>
+          </div>
+        </div>
+        <div id="priceFieldService" class="two-col" style="display:none;">
+          <div class="field"><label>Prix unitaire (FCFA)</label><input type="number" id="f_price_unit" value="5000"></div>
+          <div class="field"><label>Promo unitaire (FCFA, optionnel)</label><input type="number" id="f_promo_unit" placeholder="ex: 4000"></div>
+        </div>
+
+        <div style="display:flex; gap:10px; margin-top:10px;">
+          <button type="submit" class="btn btn-primary btn-block" id="formSubmitBtn">✅ Ajouter au catalogue</button>
+          <button type="button" class="btn btn-outline" id="cancelEditBtn" style="display:none;">✕ Annuler</button>
+        </div>
+      </form>
+    </div>
+
+    <!-- ================= CATALOGUE ACTUEL ================= -->
+    <div class="admin-card">
+      <h2>📋 Catalogue actuel</h2>
+      <div id="itemsList"></div>
+      <div style="display:flex; gap:10px; margin-top:16px; flex-wrap:wrap;">
+        <button class="btn btn-outline btn-sm" id="exportBtn">⬇️ Exporter (JSON)</button>
+        <button class="btn btn-outline btn-sm" id="importBtn">⬆️ Importer (JSON)</button>
+        <input type="file" id="importFile" accept="application/json" style="display:none;">
+        <button class="btn btn-outline btn-sm danger" id="resetBtn">♻️ Réinitialiser au catalogue par défaut</button>
+      </div>
+    </div>
+
+    <!-- ================= TEXTES DU SITE ================= -->
+    <div class="admin-card">
+      <h2>✏️ Textes du site (titres, sous-titres, mise en forme)</h2>
+      <p style="color:var(--text-soft); font-size:0.85rem;">Modifiez le contenu, mettez en <b>gras</b>, <i>italique</i>, <u>souligné</u>, changez la couleur ou la taille de chaque texte affiché sur le site, sans toucher au code.</p>
+      <div id="siteTextEditor"></div>
+      <button class="btn btn-outline btn-sm danger" id="resetTextsBtn">♻️ Réinitialiser tous les textes</button>
+    </div>
+
+    <!-- ================= SÉCURITÉ ================= -->
+    <div class="admin-card">
+      <h2>🛡️ Sécurité</h2>
+      <p style="color:var(--text-soft); font-size:0.85rem;">
+        Active un blocage du clic-droit, de la sélection et du copier-coller du texte sur le site, pour décourager la copie rapide de votre contenu.
+        <br><b>Important à savoir :</b> comme ce site est 100% autonome (sans serveur), aucune protection ne peut être totalement infranchissable — un visiteur technique averti pourra toujours contourner ce blocage via les outils du navigateur. C'est un frein, pas un coffre-fort.
+      </p>
+      <label style="display:flex; align-items:center; gap:10px; font-size:0.9rem;">
+        <input type="checkbox" id="copyProtectionToggle" style="width:20px; height:20px;">
+        Bloquer la copie de texte sur le site
+      </label>
+    </div>
+
+    <!-- ================= MOT DE PASSE ================= -->
+    <div class="admin-card">
+      <h2>🔑 Modifier le code producteur</h2>
+      <form id="pinChangeForm">
+        <div class="field"><label>Code actuel</label><input type="password" id="pin_current" required></div>
+        <div class="field"><label>Nouveau code</label><input type="password" id="pin_new" required></div>
+        <div class="field"><label>Confirmer le nouveau code</label><input type="password" id="pin_confirm" required></div>
+        <button type="submit" class="btn btn-primary btn-block">Mettre à jour le code</button>
+      </form>
+    </div>
+
+  </div>
+</div>
+
+<script src="./data.js"></script>
+<script src="./icons.js"></script>
+<script src="./admin.js"></script>
+</body>
+</html>

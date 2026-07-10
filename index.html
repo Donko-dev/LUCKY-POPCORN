@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lucky Popcorn — Pop-corn gourmet, Cotonou</title>
+<meta name="description" content="Lucky Popcorn : pop-corn artisanal (nature, salé, sucré, caramels) et distribution de gaz bio-combustible à Cotonou, Agla. Commandez sur WhatsApp.">
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" href="./icon-32.png">
+<link rel="apple-touch-icon" href="./icon-180.png">
+<meta name="theme-color" content="#7B1E3D">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container header-row">
+    <a class="brand" href="#home">
+      <img src="./logo-master.png" alt="Lucky Popcorn logo">
+      <div class="brand-text">
+        <div class="name" data-i18n="brand">Lucky Popcorn</div>
+        <div class="tag" data-i18n="tagline">Pop-corn gourmet, fait maison — Cotonou, Agla</div>
+      </div>
+    </a>
+
+    <nav class="main-nav desktop-nav">
+      <button class="nav-btn active" data-filter="all" data-i18n="navAll">Tous</button>
+      <button class="nav-btn" data-filter="products" data-i18n="navProducts">Produits</button>
+      <button class="nav-btn" data-filter="services" data-i18n="navServices">Services</button>
+      <button class="nav-btn" data-filter="activities" data-i18n="navActivities">Activités</button>
+      <button class="nav-btn" data-filter="autres" data-i18n="navAutres">Autres activités & secteurs</button>
+      <a class="nav-btn" href="./admin.html" data-i18n="adminLink">Espace producteur</a>
+    </nav>
+
+    <div class="header-actions">
+      <button class="icon-btn" id="langToggle" title="Langue">EN</button>
+      <button class="icon-btn" id="themeToggle" title="Thème">🌙</button>
+      <button class="icon-btn menu-toggle" id="menuToggle" title="Menu">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-drawer" id="mobileDrawer">
+  <div class="drawer-panel">
+    <button class="icon-btn drawer-close" id="drawerClose">✕</button>
+    <button class="nav-btn active" data-filter="all" data-i18n="navAll">Tous</button>
+    <button class="nav-btn" data-filter="products" data-i18n="navProducts">Produits</button>
+    <button class="nav-btn" data-filter="services" data-i18n="navServices">Services</button>
+    <button class="nav-btn" data-filter="activities" data-i18n="navActivities">Activités</button>
+    <button class="nav-btn" data-filter="autres" data-i18n="navAutres">Autres activités & secteurs</button>
+    <a class="nav-btn" href="./admin.html" data-i18n="adminLink">Espace producteur</a>
+  </div>
+</div>
+
+<main>
+  <section class="hero" id="home">
+    <div class="hero-medallion"></div>
+    <div class="container hero-grid">
+      <div>
+        <span class="eyebrow">Agla · Cotonou · Bénin</span>
+        <h1 data-i18n="heroTitle">Le pop-corn qui éclate de bonheur</h1>
+        <p class="lede" data-i18n="heroSubtitle">Maïs soufflé artisanal, caramels maison et saveurs sucrées-salées, préparés à Agla, Cotonou. Commandez en un clic sur WhatsApp.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="#socle" data-i18n="heroCta">Voir le catalogue</a>
+          <a class="btn btn-whatsapp" target="_blank" rel="noopener" href="https://wa.me/2290166920715?text=Bonjour%20Lucky%20Popcorn%20%F0%9F%91%8B%2C%20je%20souhaite%20passer%20une%20commande." data-i18n="heroCta2">💬 Commander sur WhatsApp</a>
+          <button class="btn btn-gold js-install-only" id="installBtn">📲 <span data-i18n="installBtn">Installer l'application</span></button>
+        </div>
+        <div style="margin-top:18px; display:flex; gap:8px;">
+          <button class="btn btn-outline btn-sm currency-btn" data-cur="FCFA">FCFA</button>
+          <button class="btn btn-outline btn-sm currency-btn" data-cur="EUR">EUR €</button>
+          <button class="btn btn-outline btn-sm currency-btn" data-cur="USD">USD $</button>
+        </div>
+      </div>
+      <div class="hero-badge-wrap">
+        <img class="hero-badge" src="./logo-master.png" alt="Médaillon Lucky Popcorn">
+      </div>
+    </div>
+    <div class="container">
+      <div class="install-banner js-install-only" id="installBanner">
+        <span data-i18n="installBtn">Installer l'application</span>
+        <button class="btn btn-primary btn-sm" id="installBannerBtn">📲 OK</button>
+      </div>
+      <div class="search-bar">
+        <span>🔎</span>
+        <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="Rechercher un produit ou service…">
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="socle">
+    <div class="container">
+      <div class="section-head"><h2 data-i18n="sectionSocle">Le socle commun</h2></div>
+      <div class="grid" id="socleGrid"></div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="sucre">
+    <div class="container">
+      <div class="section-head"><h2 data-i18n="sectionSucre">Les variantes sucrées</h2></div>
+      <div class="grid" id="sucreGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="caramel">
+    <div class="container">
+      <div class="section-head"><h2 data-i18n="sectionCaramel">Les qualités de caramel</h2></div>
+      <div class="grid" id="caramelGrid"></div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="gaz">
+    <div class="container">
+      <div class="section-head"><h2 data-i18n="sectionGaz">Distribution de gaz bio-combustible</h2></div>
+      <div class="grid" id="gazGrid"></div>
+    </div>
+  </section>
+
+  <section class="section" id="activites">
+    <div class="container">
+      <div class="section-head"><h2 data-i18n="sectionActivites">Nos activités</h2></div>
+      <div class="activities-grid" id="activitiesGrid"></div>
+    </div>
+  </section>
+
+  <section class="section section-alt" id="autres">
+    <div class="container">
+      <div class="section-head"><h2 data-i18n="sectionAutres">Autres activités & secteurs</h2></div>
+      <div id="autresGrid"></div>
+    </div>
+  </section>
+</main>
+
+<footer class="site-footer" id="contact">
+  <div class="container footer-grid">
+    <div>
+      <div class="footer-brand">
+        <img src="./logo-master.png" alt="Lucky Popcorn">
+        <strong data-i18n="brand">Lucky Popcorn</strong>
+      </div>
+      <p data-i18n="footerAddress">Agla, en face de la Pharmacie Cristal Santé, carrefour Agla Akplomey, Cotonou, Bénin</p>
+      <p>📞 +229 01 66 92 07 15</p>
+      <div class="footer-socials">
+        <a class="pulse" href="https://wa.me/2290166920715" target="_blank" rel="noopener" title="WhatsApp">
+          <svg viewBox="0 0 32 32" width="20" height="20" fill="#25D366"><path d="M16 3C9.4 3 4 8.4 4 15c0 2.4.7 4.7 2 6.6L4 29l7.6-2c1.8 1 3.9 1.5 6.1 1.5 1 0 6.6-.1 6.6-.1 6.6 0 12-5.4 12-12S22.6 3 16 3zm0 2c5.5 0 10 4.5 10 10s-4.5 10-10 10c-1.9 0-3.7-.5-5.2-1.5l-.5-.3-3.9 1 1-3.8-.3-.5C6 18 5.5 16.5 5.5 15 5.5 9.5 10 5 16 5zm-4.3 5.3c-.2 0-.5 0-.8.4-.3.3-1 1-1 2.4s1 2.8 1.2 3c.1.2 2 3.2 5 4.4 2.5 1 3 .8 3.5.8.6 0 1.8-.7 2-1.4.3-.7.3-1.3.2-1.4-.1-.2-.3-.3-.6-.4-.3-.2-1.8-.9-2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.3-.5-2.5-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.1-.2.2-.3.3-.5.1-.2 0-.4 0-.5 0-.2-.6-1.7-.9-2.3-.2-.6-.5-.5-.7-.5z"/></svg>
+        </a>
+        <a class="pulse" href="https://www.tiktok.com/@luckmandjaboutou" target="_blank" rel="noopener" title="TikTok">
+          <svg viewBox="0 0 32 32" width="20" height="20"><path fill="#fff" d="M22 4c.7 2.6 2.6 4.4 5.3 4.7v3.6c-1.8 0-3.4-.6-4.8-1.6v8.6c0 4.3-3.5 7.7-7.7 7.7S7 23.6 7 19.3c0-4.1 3.2-7.4 7.2-7.7v3.7c-1.9.3-3.4 1.9-3.4 4 0 2.2 1.8 4 4 4s4.1-1.7 4.1-4V4h3z"/></svg>
+        </a>
+        <a class="pulse" href="https://www.facebook.com/share/19KLBMpp7P/" target="_blank" rel="noopener" title="Facebook">
+          <svg viewBox="0 0 32 32" width="20" height="20" fill="#1877F2"><path d="M28 16c0-6.6-5.4-12-12-12S4 9.4 4 16c0 6 4.4 10.9 10.1 11.9v-8.4h-3v-3.5h3v-2.6c0-3 1.8-4.6 4.5-4.6 1.3 0 2.6.2 2.6.2v2.9h-1.5c-1.4 0-1.9.9-1.9 1.8v2.3h3.2l-.5 3.5h-2.7v8.4C23.6 26.9 28 22 28 16z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div>
+      <h4 data-i18n="menuLabel">Catégories</h4>
+      <div class="footer-links">
+        <a href="#socle" data-i18n="navProducts">Produits</a>
+        <a href="#gaz" data-i18n="navServices">Services</a>
+        <a href="#activites" data-i18n="navActivities">Activités</a>
+        <a href="#autres" data-i18n="navAutres">Autres activités & secteurs</a>
+        <a href="./admin.html" data-i18n="adminLink">Espace producteur</a>
+      </div>
+    </div>
+    <div>
+      <h4 data-i18n="footerStore">Boutique d'outils</h4>
+      <p><a href="https://majesticfordonko.mychariow.shop" target="_blank" rel="noopener">🛍️ EMPIRE DONKO TOOLS STORE</a></p>
+      <p><a href="mailto:empiredonko@gmail.com">empiredonko@gmail.com</a></p>
+      <p><a href="https://wa.me/2290196809106" target="_blank" rel="noopener">+229 01 96 80 91 06</a></p>
+    </div>
+  </div>
+  <div class="container footer-bottom">
+    <span data-i18n="footerPowered">Powered by</span> <strong>EMPIRE DONKO</strong>
+    <span>© 2026 Lucky Popcorn — <span data-i18n="footerRights">Tous droits réservés.</span></span>
+  </div>
+</footer>
+
+<!-- Partner floating bubble -->
+<div class="partner-fab">
+  <div class="partner-panel" id="partnerPanel">
+    <h4 data-i18n="partnerBubbleTitle">Partenariat & outils personnalisés</h4>
+    <p data-i18n="partnerBubbleText">Une idée d'outil sur mesure pour votre activité ? Écrivez-nous.</p>
+    <a class="btn btn-whatsapp" target="_blank" rel="noopener" href="https://wa.me/2290196809106?text=Bonjour%20EMPIRE%20DONKO%20%F0%9F%91%8B%2C%20je%20souhaite%20discuter%20d%27un%20partenariat%20ou%20d%27un%20outil%20personnalis%C3%A9%20pour%20mon%20activit%C3%A9.">💬 <span data-i18n="partnerWhatsapp">WhatsApp</span></a>
+    <a class="btn btn-outline" href="mailto:empiredonko@gmail.com?subject=Partenariat%20%26%20outil%20personnalis%C3%A9">✉️ <span data-i18n="partnerEmail">Email</span></a>
+  </div>
+  <button class="partner-fab-btn" id="partnerFabBtn">🤝 <span data-i18n="partnerBubbleTitle">Partenariat & outils personnalisés</span></button>
+</div>
+
+<!-- Details modal -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <button class="modal-close" id="modalCloseBtn">✕</button>
+    <div class="modal-media" id="modalMedia"></div>
+    <div class="modal-body">
+      <span class="quality-tag" id="modalQuality">Qualité premium</span>
+      <h3 id="modalTitle"></h3>
+      <p id="modalDetails"></p>
+      <div class="modal-prices" id="modalPrices"></div>
+      <div class="modal-actions" id="modalExtraLinks" style="margin-bottom:10px;"></div>
+      <div class="modal-actions">
+        <a class="btn btn-whatsapp" id="modalOrderLink" target="_blank" rel="noopener">💬 <span data-i18n="orderWhatsapp">Commander sur WhatsApp</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./data.js"></script>
+<script src="./icons.js"></script>
+<script src="./app.js"></script>
+</body>
+</html>
