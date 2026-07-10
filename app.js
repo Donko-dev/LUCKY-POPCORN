@@ -112,7 +112,7 @@ function productCardHTML(item, kind) {
       ${priceLabel ? `<div class="price-row">${priceLabel}</div>` : ""}
       <div class="card-actions">
         <button class="btn btn-outline btn-sm" onclick="openDetails('${kind}','${item.id}')">${t("viewDetails")}</button>
-        <a class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener" href="${orderLink(item, kind)}">💬 ${t("orderWhatsapp")}</a>
+        <a class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener" href="${orderLink(item, kind)}">💬 ${t("orderWhatsappShort")}</a>
       </div>
     </div>
   </div>`;
@@ -177,7 +177,7 @@ function renderActivities() {
       <div>
         <h3>${item.name[state.lang]}</h3>
         <p>${item.short[state.lang]}</p>
-        <a class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener" href="${orderLink(item,'activity')}">💬 ${t("orderWhatsapp")}</a>
+        <a class="btn btn-whatsapp btn-sm" target="_blank" rel="noopener" href="${orderLink(item,'activity')}">💬 ${t("orderWhatsappShort")}</a>
       </div>
     </div>`).join("");
   const section = container.closest(".section");
