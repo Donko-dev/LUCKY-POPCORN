@@ -61,6 +61,8 @@ lucky-popcorn/
 
 **Bouton "🔄 Charger la version déjà publiée"** dans l'admin : utile si vous changez d'appareil — il récupère ce qui est actuellement en ligne pour repartir d'une base à jour avant de continuer vos modifications.
 
+**Comment ça se décide, techniquement (pour bien comprendre) :** chaque appareil vérifie d'abord s'il a un brouillon local (des modifications déjà enregistrées sur cet appareil précis). Si oui, c'est ce brouillon qui s'affiche — vos changements sont donc **immédiats sur votre propre téléphone**, dès que vous cliquez sur "Ajouter"/"Enregistrer". Si l'appareil n'a aucun brouillon local (cas de tous vos clients), il affiche la dernière version **publiée** (`catalog-data.json` / `site-settings.json`). C'est cette étape de publication qui fait le lien entre les deux.
+
 *Remarque : cette synchronisation nécessite une connexion internet (comme GitHub Pages lui-même). Testée en local via double-clic sur `index.html` (`file://`), la récupération de `catalog-data.json` ne fonctionnera pas à cause des restrictions du navigateur — c'est normal, ça fonctionnera dès la mise en ligne réelle.*
 
 ## 🎨 À propos des images
